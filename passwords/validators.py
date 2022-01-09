@@ -7,7 +7,10 @@ from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 try:
-    from django.utils.encoding import smart_text
+    try:
+        from django.utils.encoding import smart_str
+    except ImportError: # django < 4.0.0
+        from django.utils.encoding import smart_text
 except ImportError:  # django < 1.4.2
     from django.utils.encoding import smart_unicode as smart_text
 
